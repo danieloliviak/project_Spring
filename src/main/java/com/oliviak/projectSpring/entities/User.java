@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_user")
 public class User implements java.io.Serializable {
-    private static final long serialVersionUID = 1L;
+    public static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
