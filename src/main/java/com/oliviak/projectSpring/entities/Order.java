@@ -98,6 +98,13 @@ public class Order implements java.io.Serializable {
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
+    public Double getTotal() {
+        double sum = 0.0;
+        for (OrderItem x : items) {
+            sum += x.getSubTotal();
+        }
+        return sum;
+    }
 
     @Override
     public int hashCode() {
