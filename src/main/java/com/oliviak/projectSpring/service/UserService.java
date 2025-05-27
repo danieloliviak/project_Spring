@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.oliviak.projectSpring.entities.User;
 import com.oliviak.projectSpring.repositories.UserRepository;
+import com.oliviak.projectSpring.service.exceptions.DataBaseException;
 import com.oliviak.projectSpring.service.exceptions.ResourceNotFoundException;
 @Service
 public class UserService {
@@ -24,7 +27,13 @@ public class UserService {
         return repository.save(obj);
     }
     public void delete(Long id) {
-        repository.deleteById(id);
+        try{
+            repository.deleteById(id);
+        }catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        }catch(DataIntegrityViolationException e) {
+            throw new DataBaseException("Integrity violation");
+        }
     }
 
     private void updateData(User entity, User obj) {
