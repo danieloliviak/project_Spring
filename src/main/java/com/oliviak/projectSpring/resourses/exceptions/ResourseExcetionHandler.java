@@ -13,7 +13,7 @@ import com.oliviak.projectSpring.service.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
-public class ResourseExcetionHandler {
+public class ResourseExcetionHandler { 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
         String error = "Resource not found";
